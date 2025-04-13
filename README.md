@@ -7,6 +7,12 @@ A modern, interactive platform for managing phishing campaigns, built with Flask
 ![Flask](https://img.shields.io/badge/Flask-2.0+-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](static/images/dashboard.png)
+*Main dashboard with campaign overview and statistics*
+
 ## 🌟 Why Caesar Phishing Framework?
 
 Caesar Phishing Framework is designed to provide cybersecurity professionals with a powerful tool for testing security awareness within organizations. This framework is extremely useful for:
@@ -162,3 +168,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 For questions and support, please open an issue in the GitHub repository.
+
+## 📸 Adding Screenshots
+
+To add your own screenshots:
+
+1. Take screenshots of your application
+2. Save them in the `static/images` directory
+3. Use the following format for image names:
+   - `dashboard.png`
+   - `campaign-creation.png`
+   - `monitoring.png`
+   - `telegram-notifications.png`
+4. Recommended image specifications:
+   - Format: PNG
+   - Resolution: 1920x1080 or higher
+   - File size: < 1MB per image
+   - Aspect ratio: 16:9 
