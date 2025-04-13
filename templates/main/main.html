@@ -1,0 +1,283 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="container py-4">
+    <!-- Hero Section with Particle Effect -->
+    <div class="text-center mb-5 position-relative hero-section">
+        <div id="particles-js"></div>
+        <h1 class="display-4 fw-bold text-gradient mb-3">Caesar Phishing Command Center</h1>
+        <p class="lead text-muted">Conquer the Digital Realm with Strategic Campaigns</p>
+        <div class="stats-bar mt-4">
+            <div class="stat-item">
+                <i class="fas fa-broadcast-tower text-primary"></i>
+                <span class="stat-value" id="active-count">{{ active_pages_count }}</span>
+                <span class="stat-label">Active Campaigns</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-trophy text-success"></i>
+                <span class="stat-value" id="data-count">{{ captured_data_count }}</span>
+                <span class="stat-label">Total Captures</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Quick Actions -->
+        <div class="col-12">
+            <div class="quick-actions">
+                <a href="{{ url_for('start') }}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-fishing-rod"></i>
+                    </div>
+                    <h3>New Campaign</h3>
+                    <p>Launch a new phishing operation</p>
+                </a>
+                <a href="{{ url_for('campaigns') }}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Active Campaigns</h3>
+                    <p>Monitor your ongoing operations</p>
+                </a>
+                <a href="{{ url_for('data') }}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>View Captures</h3>
+                    <p>Review captured credentials</p>
+                </a>
+                <a href="{{ url_for('settings') }}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Settings</h3>
+                    <p>Configure your battlestation</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Gradient Text Effect */
+.text-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb, #6e48aa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-section h1, .hero-section p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-item i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--bs-gray-500);
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    color: inherit;
+}
+
+.action-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.action-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.action-card p {
+    color: var(--bs-gray-500);
+    margin: 0;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#6e48aa' },
+            shape: { type: 'circle' },
+            opacity: {
+                value: 0.5,
+                random: false,
+                animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#6e48aa',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: 'none',
+                random: false,
+                straight: false,
+                outMode: 'out',
+                bounce: false,
+            }
+        },
+        interactivity: {
+            detectsOn: 'canvas',
+            events: {
+                onHover: { enable: true, mode: 'grab' },
+                onClick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 140, lineLinked: { opacity: 1 } },
+                push: { particles_nb: 4 }
+            }
+        },
+        retina_detect: true
+    });
+
+    // Update counts periodically
+    setInterval(updateCounts, 30000);
+});
+
+function updateCounts() {
+    fetch('/get_counts')
+        .then(response => response.json())
+        .then(data => {
+            const activeCount = document.getElementById('active-count');
+            const dataCount = document.getElementById('data-count');
+            
+            animateCount(activeCount, parseInt(activeCount.textContent), data.active_pages);
+            animateCount(dataCount, parseInt(dataCount.textContent), data.captured_data);
+        });
+}
+
+function animateCount(element, start, end) {
+    if (start === end) return;
+    
+    const duration = 1500;
+    const steps = 30;
+    const step = (end - start) / steps;
+    let current = start;
+    
+    const animate = () => {
+        current += step;
+        if ((step > 0 && current >= end) || (step < 0 && current <= end)) {
+            element.textContent = end;
+            element.style.transform = 'scale(1)';
+            return;
+        }
+        
+        element.textContent = Math.round(current);
+        element.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            element.style.transform = 'scale(1)';
+        }, 100);
+        
+        requestAnimationFrame(animate);
+    };
+    
+    requestAnimationFrame(animate);
+}
+</script>
+{% endblock %} 

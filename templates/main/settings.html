@@ -1,0 +1,512 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="container py-4">
+    <!-- Hero Section with Particle Effect -->
+    <div class="text-center mb-5 position-relative hero-section">
+        <div id="particles-js"></div>
+        <h1 class="display-4 fw-bold text-gradient mb-3">Settings</h1>
+        <p class="lead text-muted">Configure Your Battlestation</p>
+    </div>
+
+    <!-- Settings Container -->
+    <div class="settings-container">
+        <!-- Ngrok Configuration -->
+        <div class="settings-card">
+            <div class="settings-header">
+                <div class="settings-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="settings-title">
+                    <h3>Ngrok Configuration</h3>
+                    <p>Configure your Ngrok authentication token for tunneling</p>
+                </div>
+            </div>
+            <div class="settings-content">
+                <div class="form-group">
+                    <label for="ngrokToken">Ngrok Auth Token</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="ngrokToken" value="{{ config.ngrok_token }}" placeholder="Enter your Ngrok auth token">
+                        <button class="btn btn-outline-secondary" type="button" onclick="toggleTokenVisibility()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="form-text text-muted">
+                        Don't have a token? <a href="https://dashboard.ngrok.com/get-started/your-authtoken" target="_blank">Get one here</a>
+                    </small>
+                </div>
+                <button class="btn btn-gradient mt-3" onclick="updateNgrokToken()">
+                    <i class="fas fa-save me-2"></i>Save Token
+                </button>
+            </div>
+        </div>
+
+        <!-- Server Configuration -->
+        <div class="settings-card">
+            <div class="settings-header">
+                <div class="settings-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <div class="settings-title">
+                    <h3>Server Configuration</h3>
+                    <p>Configure your server settings</p>
+                </div>
+            </div>
+            <div class="settings-content">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="serverHost">Host</label>
+                            <input type="text" class="form-control" id="serverHost" value="{{ config.server.host }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="serverPort">Port</label>
+                            <input type="number" class="form-control" id="serverPort" value="{{ config.server.port }}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="debugMode" {{ 'checked' if config.server.debug }}>
+                    <label class="form-check-label" for="debugMode">Debug Mode</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="settings-card">
+            <div class="settings-header">
+                <div class="settings-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="settings-title">
+                    <h3>Security Settings</h3>
+                    <p>Configure security options for your application</p>
+                </div>
+            </div>
+            <div class="settings-content">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Security settings are managed through the config file for enhanced protection.
+                </div>
+                <div class="security-info">
+                    <div class="security-item">
+                        <span class="security-label">Secret Key Status</span>
+                        <span class="security-value">
+                            <i class="fas fa-check-circle text-success"></i> Configured
+                        </span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-label">Admin Protection</span>
+                        <span class="security-value">
+                            <i class="fas fa-check-circle text-success"></i> Enabled
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Telegram Configuration -->
+        <div class="settings-card">
+            <div class="settings-header">
+                <div class="settings-icon">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <div class="settings-title">
+                    <h3>Telegram Configuration</h3>
+                    <p>Configure Telegram bot for instant notifications</p>
+                </div>
+            </div>
+            <div class="settings-content">
+                <div class="form-group">
+                    <label for="telegramBotToken">Telegram Bot Token</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="telegramBotToken" 
+                               value="{{ config.telegram.bot_token if config.telegram else '' }}" 
+                               placeholder="Enter your Telegram bot token">
+                        <button class="btn btn-outline-secondary" type="button" onclick="toggleTelegramTokenVisibility()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="form-text text-muted">
+                        Don't have a bot? <a href="https://t.me/BotFather" target="_blank">Create one here</a>
+                    </small>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="telegramChatId">Chat ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="telegramChatId" 
+                               value="{{ config.telegram.chat_id if config.telegram else '' }}" 
+                               placeholder="Enter your Telegram chat ID">
+                    </div>
+                    <small class="form-text text-muted">
+                        How to get Chat ID? Send a message to <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a>
+                    </small>
+                </div>
+                <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="telegramEnabled" 
+                           {{ 'checked' if config.telegram and config.telegram.bot_token and config.telegram.chat_id }}>
+                    <label class="form-check-label" for="telegramEnabled">Enable Telegram Notifications</label>
+                </div>
+                <button class="btn btn-gradient mt-3" onclick="updateTelegramConfig()">
+                    <i class="fas fa-save me-2"></i>Save Telegram Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Gradient Text Effect */
+.text-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb, #6e48aa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-section h1, .hero-section p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Settings Container */
+.settings-container {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Settings Card */
+.settings-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.settings-card:hover {
+    transform: translateY(-5px);
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.settings-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.settings-title h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.settings-title p {
+    margin: 0;
+    color: var(--bs-gray-500);
+    font-size: 0.9rem;
+}
+
+/* Form Styling */
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(110, 72, 170, 0.25);
+    color: white;
+}
+
+.form-control:read-only {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.input-group .btn {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--bs-gray-400);
+}
+
+.input-group .btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.form-check-input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-check-input:checked {
+    background-color: #6e48aa;
+    border-color: #6e48aa;
+}
+
+/* Security Info */
+.security-info {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.security-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.security-label {
+    color: var(--bs-gray-400);
+}
+
+.security-value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Button Styles */
+.btn-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 5px 15px rgba(110, 72, 170, 0.4);
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-notification i {
+    color: #6e48aa;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#6e48aa' },
+            shape: { type: 'circle' },
+            opacity: {
+                value: 0.5,
+                random: false,
+                animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#6e48aa',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: 'none',
+                random: false,
+                straight: false,
+                outMode: 'out',
+                bounce: false,
+            }
+        },
+        interactivity: {
+            detectsOn: 'canvas',
+            events: {
+                onHover: { enable: true, mode: 'grab' },
+                onClick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 140, lineLinked: { opacity: 1 } },
+                push: { particles_nb: 4 }
+            }
+        },
+        retina_detect: true
+    });
+});
+
+function toggleTokenVisibility() {
+    const tokenInput = document.getElementById('ngrokToken');
+    const toggleButton = tokenInput.nextElementSibling.querySelector('i');
+    
+    if (tokenInput.type === 'password') {
+        tokenInput.type = 'text';
+        toggleButton.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+        tokenInput.type = 'password';
+        toggleButton.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+}
+
+function updateNgrokToken() {
+    const token = document.getElementById('ngrokToken').value;
+    
+    fetch('/update_config', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ngrok_token: token
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showToast('Ngrok token updated successfully!', 'check-circle');
+        } else {
+            showToast('Error updating Ngrok token!', 'exclamation-circle');
+        }
+    });
+}
+
+function showToast(message, icon) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 100);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+function toggleTelegramTokenVisibility() {
+    const tokenInput = document.getElementById('telegramBotToken');
+    const eyeIcon = event.currentTarget.querySelector('i');
+    
+    if (tokenInput.type === 'password') {
+        tokenInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    } else {
+        tokenInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    }
+}
+
+function updateTelegramConfig() {
+    const botToken = document.getElementById('telegramBotToken').value;
+    const chatId = document.getElementById('telegramChatId').value;
+    const enabled = document.getElementById('telegramEnabled').checked;
+
+    fetch('/update_config', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            telegram: {
+                bot_token: botToken,
+                chat_id: chatId,
+                enabled: enabled
+            }
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Telegram settings updated successfully!', 'success');
+        } else {
+            showNotification('Failed to update Telegram settings.', 'error');
+        }
+    })
+    .catch(error => {
+        showNotification('Error updating Telegram settings.', 'error');
+    });
+}
+</script>
+{% endblock %} 

