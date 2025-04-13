@@ -13,6 +13,18 @@ A modern, interactive platform for managing phishing campaigns, built with Flask
 ![Dashboard](static/images/dashboard.png)
 *Main dashboard with campaign overview and statistics*
 
+### Campaign Creation
+![Campaign Creation](static/images/campaign-creation.png)
+*Creating a new phishing campaign with template selection*
+
+### Real-time Monitoring
+![Monitoring](static/images/monitoring.png)
+*Real-time monitoring of active campaigns*
+
+### Telegram Notifications
+![Telegram](static/images/telegram-notifications.png)
+*Instant notifications via Telegram bot*
+
 ## 🌟 Why Caesar Phishing Framework?
 
 Caesar Phishing Framework is designed to provide cybersecurity professionals with a powerful tool for testing security awareness within organizations. This framework is extremely useful for:
@@ -169,19 +181,48 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions and support, please open an issue in the GitHub repository.
 
-## 📸 Adding Screenshots
+## 🔄 Future Updates
 
-To add your own screenshots:
+We are constantly working on improving Caesar Phishing Framework. Here are the planned updates:
 
-1. Take screenshots of your application
-2. Save them in the `static/images` directory
-3. Use the following format for image names:
-   - `dashboard.png`
-   - `campaign-creation.png`
-   - `monitoring.png`
-   - `telegram-notifications.png`
-4. Recommended image specifications:
-   - Format: PNG
-   - Resolution: 1920x1080 or higher
-   - File size: < 1MB per image
-   - Aspect ratio: 16:9 
+### 🔒 Security Enhancements
+- Implement proper session management
+- Add rate limiting for API endpoints
+- Add CSRF protection
+- Implement proper password hashing
+- Add input validation and sanitization
+
+### 🚀 New Features
+- User management system
+- Campaign templates management
+- Advanced reporting and analytics dashboard
+- Multi-format export (PDF, Excel)
+- API documentation
+- Campaign scheduling
+- Email notifications integration
+
+### 💻 UI/UX Improvements
+- Dark/light theme toggle
+- Enhanced responsive design
+- Loading states and better error handling
+- Tooltips and help documentation
+- Keyboard shortcuts
+
+### 🏗️ Code Structure
+- MVC pattern implementation
+- Comprehensive logging system
+- Unit and integration tests
+- Type hints
+- Enhanced error handling
+- Function documentation
+
+### 💾 Database
+- Migration from JSON to proper database (SQLite/PostgreSQL)
+- Database migrations
+- Data backup functionality
+
+### 🚢 Deployment
+- Docker support
+- Deployment documentation
+- CI/CD pipeline
+- Monitoring and logging
