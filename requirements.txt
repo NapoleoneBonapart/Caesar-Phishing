@@ -1,0 +1,4 @@
+flask==2.0.1
+pyngrok==5.1.0
+requests==2.26.0
+python-telegram-bot==20.7 
